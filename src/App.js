@@ -345,3 +345,5 @@ import { useState, useCallback } from 'react';
 
 
 // PULL REQUEST - now comes the part where forking is defined.. so let us say that I have forked an open source project and I have contributed to that project.. now I will have to ask to the actual project owners that hey I have made some changes after forking your project ( in my own branch) so after that I will check with them that if I qualify to make the changes effective in the actual project.. the owner will review my code 
+
+// then the actual project owner can confirm the pull request. once done , the changes that are made on the borrowee repo will be reflected on the main project 
