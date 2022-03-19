@@ -1,12 +1,9 @@
 import React from 'react';
 import "../../App.css";
 
-const Purchase = ({products}) => {
 
-    const selectChange = (e) => {
-        console.log(e.target.value)
-      }
-
+const Purchase = ({selectChange, products}) => {
+    
     return (
     <div className="card">
         <h3>Purchase Component</h3>
@@ -23,7 +20,15 @@ const Purchase = ({products}) => {
                     {product.pName} - ${product.price}
                     </option>
             })}
-        </select>
+        </select> 
+
+        {/* <TotalContext.Consumer>
+            {(demo)=>{
+                return(
+                    <div>This value is from the global Context : {demo}</div>
+                )
+            }}
+        </TotalContext.Consumer> */}
     </div>
   )
 }

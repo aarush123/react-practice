@@ -10,6 +10,7 @@ import { Routes, Route, Link, Redirect} from "react-router-dom";
 // import MapPractice from './components/MapPractice';
 // import Buttons from './components/Buttons';
 import { useState, useCallback } from 'react';
+import TotalContext from "./store/Total-Context";
 // import HeaderSection from './components/HeaderSection.js';
 // import CounterSection from './components/CounterSection';
 // import FlagSection from './components/FlagSection';
@@ -365,3 +366,117 @@ import { useState, useCallback } from 'react';
 // so let us say that two people make some change in one line only so github gets confused and after committing, it will prompt an error saying which change do you want to keep.. ? 
 
 // in that case.. we will have to manually remove the lines that we do not want to keep and then merge the pull request to the main branch
+
+
+// ------------------------------------ github end -------------------------------------
+
+
+// ------------------------------------------------- CONTEXT API --------------------------------------------
+
+// this is used for global state management... when there are some values that I want to declare global for the entire project so that I do not have to use prop in particular.. then I use context api 
+
+// it is a 3 step process 
+/* 
+1. creating context 
+2. Provider
+3. Consumer
+
+------------- creating context -----------------
+
+for creating context, we use const nameOfContext = React.createContext(default Value); 
+we can manipulate the default value later on without any problem
+
+Now generally the context is created as a separate file so that it can be used anywhere in the project.. one method is to make the folder named as store and in that we can create a global context component
+
+---------------- Provider ----------- 
+Once the context is created then we have to provide it. 
+
+-------------the syntax for the same is -------  
+
+<nameOfContext.Provider value = {value}>
+  <name of the component rendered />
+</nameOfContext.Provider>
+
+Now the nameOfContext is the name of the context that I have created in the first step.. 
+value is the fixed attribute which can take anything.. it is going to take the state which I want to use globally  
+and inside of it.. we will render that component where we want the value to be available.. 
+I mean the component where the context will be called.. the global object basically.. 
+
+--------------- Consumer ----------- 
+
+now the third step is where I will refer the context.. meaning where I will use the global context that I have made.
+
+the syntax is bit different .. 
+in the component where I have to use the context I will have to wrap the entire application in 
+under the main function's return statement 
+<nameOfContext.Consumer>
+  {(value)=>{
+    return(
+      <div>
+        <h1>This is the : {value}</h1>
+      </div>
+    )
+  }}
+</nameOfContext.Consumer>
+
+the nameOfContext.Consumer return a callback function and the function takes in the value which was passed as an attribute to the main provider value and then the JSX is returned.. 
+
+I can use context anywhere in my project by just giving it a return function and it will provide the value that I have passed where I have declared the provider
+
+--------------------------------------------------- USECONTEXT -----------------------------------------------
+
+  this is the hook which I can use in place of Consumer function.. I can use simply use the useContext(nameOfContext)
+const consumerName = useContext(nameOfContext)
+and by doing that I do not have to return the function for the consumer Function 
+
+*/
+
+
+
+const App = () => {
+  const [demo, setDemo] = useState(0);
+  const products=[
+    {pName:'Apple',price:30},
+    {pName:'Banana',price:3},
+    {pName:'Orange',price:10},
+    {pName:'Grapes',price:8}
+  ];
+  const [itemChosen, setItemChosen] = useState([]);
+  const [productPrice, setProductPrice] = useState(0);
+  
+  const selectChange = (e) => {
+      let pName = e.target.options[e.target.selectedIndex].text;
+      let price = e.target.value;
+      let tCart=[...itemChosen];
+      let obj = {pName,price};
+      let tPrice = parseInt(price);
+      tPrice = productPrice + tPrice;
+      tCart.push(obj);
+      setItemChosen(tCart);
+      setProductPrice(tPrice);
+      console.log(itemChosen, productPrice);
+  }
+  return (
+    
+    <div className = "mainApp_row_class">
+      
+      <Purchase 
+      selectChange={selectChange}
+
+      products={products}
+      />
+
+
+      <Cart 
+            itemChosen={itemChosen}
+            productPrice={productPrice}
+      />
+      <TotalContext.Provider value={productPrice}>
+        <Total/> 
+      </TotalContext.Provider>
+      
+    </div>
+  )
+}
+
+export default App;
