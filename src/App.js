@@ -347,3 +347,21 @@ import { useState, useCallback } from 'react';
 // PULL REQUEST - now comes the part where forking is defined.. so let us say that I have forked an open source project and I have contributed to that project.. now I will have to ask to the actual project owners that hey I have made some changes after forking your project ( in my own branch) so after that I will check with them that if I qualify to make the changes effective in the actual project.. the owner will review my code 
 
 // then the actual project owner can confirm the pull request. once done , the changes that are made on the borrowee repo will be reflected on the main project 
+
+
+//squashing commits -  if we have a lot for commits that we are working on and we want to merge it into one commit.then how do we do it.. we do it by "rebase" command 
+
+// let's say that I have done 4 commits and I want to make one commit for that.. so after making commits., I will get the commit ID and then I will take the 5th commit ID and use rebase -i `5th commit ID`, this will open a terminal with the 4 IDs above the 5th, that I took. and then I can pick and squash between those 4 commits.. 
+// pick 1234455(this will be the random ID that I am going to get)
+// s 1234459
+// s 1234451
+// pick 1234452
+// the pick which is above the S's will be the master of the S's .. so in the above example.. the id 1234455 will contain the S ones.. then the panel will open.. change it however you want and to exit.. esc :x
+// NOTE - whenever we are creating a new branch then that branch will be after the head (main / master) so all the changes are supposed to be done before we create a new branch. 
+
+
+// MERGE CONFLICT 
+
+// so let us say that two people make some change in one line only so github gets confused and after committing, it will prompt an error saying which change do you want to keep.. ? 
+
+// in that case.. we will have to manually remove the lines that we do not want to keep and then merge the pull request to the main branch
