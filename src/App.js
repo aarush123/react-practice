@@ -480,3 +480,20 @@ const App = () => {
 }
 
 export default App;
+
+
+/*
+
+----------------------------------------------------Redux---------------------------------------------------
+
+Redux is a third party framework to work with complex state management 
+
+to create the redux application 
+npx create-react-app name-of-app --template redux
+
+1. Create the global Store and Reducer
+2. use the <Provider> to pass/provide the store data --- generally when we have to make the provider then we wrap the app component in Provider.. 
+3. Access the store data at component level --- to use the data on component level.. we can either use the useSelector() or useStore() hook or connect() in case of class based components 
+4. Dispatch actions if there are any events -- 
+
+*/
