@@ -322,3 +322,26 @@ import { useState, useCallback } from 'react';
 
 // now let us say that if I am working on some project and I want to make the repository, so that I can upload the changes there only.. that's the purpose of the github, right.? 
 // in that case I will register my repository that I have made on my account on the project on my computer that I am working on... that is done by one command "git remote add origin `here comes the url (http)`"
+// let us break that url 
+// 2. remote - this means that I working with URL 
+// 3. add - this means that I am adding a new URL 
+// 4. origin - now this is the part, this is the name of the url.. kind of a dns address.. or a contact name for the particular number, I can not remember every number in my phone so I put a name to those numbers.. now it is not mandatory that it has to be origin but by convention we keep it that way.. 
+
+// now pushing the changes for that folder to that repository -- we use the command "git push origin master"
+// breaking the command -
+// push -- pushing the changes 
+
+// origin - this is same as above.. to which repository you are pushing the changes 
+// master -- to which branch you are pushing the changes 
+
+// FORKING -- now let us say that there is a project in world that I want to work on.. so in the ideal situation, I should not be allowed to change any thing on that particular organization's folder.. so in that case I fork that project to my personal account and that creates a new repository with the same name but in my account so that I can contribute to it.. even if the repository is public for the world to see, no one in github can change the code that is not there in their account.. 
+
+// the URL from where I have forked the repository.. is known as "UPSTREAM URL" and my url is known as "origin"
+
+// so if I want to connect the url to my project then I will use git remote add upstream "the url from where I have forked the repo"
+
+//  NEVER COMMIT ON THE MAIN BRANCH, ALWAYS CREATE THE NEW BRANCH WHILE WORKING AND THEN THEY WILL BE MERGED 
+// to create the new branch.. git branch "name of the branch"
+
+
+// PULL REQUEST - now comes the part where forking is defined.. so let us say that I have forked an open source project and I have contributed to that project.. now I will have to ask to the actual project owners that hey I have made some changes after forking your project ( in my own branch) so after that I will check with them that if I qualify to make the changes effective in the actual project.. the owner will review my code 
