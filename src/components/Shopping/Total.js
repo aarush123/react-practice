@@ -1,9 +1,11 @@
 import React from 'react'
 import "../../App.css";
-import TotalContext from '../../store/Total-Context';
-import { useContext } from 'react';
+// import { useContext } from 'react';
+
+import { useSelector } from 'react-redux';
 const Total = () => {
-  const Total = useContext(TotalContext);
+  const Total = useSelector(state=>state.total);
+
   return (
 
           <div className="card">
