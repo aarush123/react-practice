@@ -5,10 +5,21 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from 'react-redux';
+import store from './store/Store';
+
+/* 
+Here I am importing the Provider function react redux which has to be wrapped around the entire App.js component so that I can access the global store on any level of the entire project.. 
+it takes in store as a prop which is the global store object.. 
+
+and to access the store react-redux has two hooks.. useSelector() or useStore()
+*/
 ReactDOM.render(
   <BrowserRouter>
   <React.StrictMode>
+    <Provider store={store}>
     <App />
+    </Provider>
   </React.StrictMode>
   </BrowserRouter>,
   document.getElementById('root')

@@ -433,53 +433,53 @@ and by doing that I do not have to return the function for the consumer Function
 
 
 
-const App = () => {
-  const [demo, setDemo] = useState(0);
-  const products=[
-    {pName:'Apple',price:30},
-    {pName:'Banana',price:3},
-    {pName:'Orange',price:10},
-    {pName:'Grapes',price:8}
-  ];
-  const [itemChosen, setItemChosen] = useState([]);
-  const [productPrice, setProductPrice] = useState(0);
+// const App = () => {
+//   const [demo, setDemo] = useState(0);
+//   const products=[
+//     {pName:'Apple',price:30},
+//     {pName:'Banana',price:3},
+//     {pName:'Orange',price:10},
+//     {pName:'Grapes',price:8}
+//   ];
+//   const [itemChosen, setItemChosen] = useState([]);
+//   const [productPrice, setProductPrice] = useState(0);
   
-  const selectChange = (e) => {
-      let pName = e.target.options[e.target.selectedIndex].text;
-      let price = e.target.value;
-      let tCart=[...itemChosen];
-      let obj = {pName,price};
-      let tPrice = parseInt(price);
-      tPrice = productPrice + tPrice;
-      tCart.push(obj);
-      setItemChosen(tCart);
-      setProductPrice(tPrice);
-      console.log(itemChosen, productPrice);
-  }
-  return (
+//   const selectChange = (e) => {
+//       let pName = e.target.options[e.target.selectedIndex].text;
+//       let price = e.target.value;
+//       let tCart=[...itemChosen];
+//       let obj = {pName,price};
+//       let tPrice = parseInt(price);
+//       tPrice = productPrice + tPrice;
+//       tCart.push(obj);
+//       setItemChosen(tCart);
+//       setProductPrice(tPrice);
+//       console.log(itemChosen, productPrice);
+//   }
+//   return (
     
-    <div className = "mainApp_row_class">
+//     <div className = "mainApp_row_class">
       
-      <Purchase 
-      selectChange={selectChange}
+//       <Purchase 
+//       selectChange={selectChange}
 
-      products={products}
-      />
+//       products={products}
+//       />
 
 
-      <Cart 
-            itemChosen={itemChosen}
-            productPrice={productPrice}
-      />
-      <TotalContext.Provider value={productPrice}>
-        <Total/> 
-      </TotalContext.Provider>
+//       <Cart 
+//             itemChosen={itemChosen}
+//             productPrice={productPrice}
+//       />
+//       <TotalContext.Provider value={productPrice}>
+//         <Total/> 
+//       </TotalContext.Provider>
       
-    </div>
-  )
-}
+//     </div>
+//   )
+// }
 
-export default App;
+// export default App;
 
 
 /*
@@ -496,4 +496,60 @@ npx create-react-app name-of-app --template redux
 3. Access the store data at component level --- to use the data on component level.. we can either use the useSelector() or useStore() hook or connect() in case of class based components 
 4. Dispatch actions if there are any events -- 
 
+Q1. which package do you need to implement redux to your application ? 
+--- npm install --save redux react-redux
+  
+how to create provider so that the global store can be accessed,, 
+now the general way is to import the Provider from react-redux first and then we will have to wrap the entire application, which is the <App /> component and that has to be done in Index.js
+
+syntax for provider.. 
+
+import Provider from 'react-redux';
+<Provider store={store}>
+  <App />
+</Provider>
+
+The above provider component takes in store as an prop which is the global store that I have created using 
+createStore(reducer) method of redux
+
+---------- difference between useStore() and useSelector() hook ?------------------------
+
+useStore() hook returns the entire store however useSelector() hook returns the specific state.. so that we can use the specific object from the store on componenet level for better performance
+
 */
+
+
+const App = () => {
+  const [demo, setDemo] = useState(0);
+
+  const [itemChosen, setItemChosen] = useState([]);
+  const [productPrice, setProductPrice] = useState(0);
+  
+  // const selectChange = (e) => {
+  //     let pName = e.target.options[e.target.selectedIndex].text;
+  //     let price = e.target.value;
+  //     let tCart=[...itemChosen];
+  //     let obj = {pName,price};
+  //     let tPrice = parseInt(price);
+  //     tPrice = productPrice + tPrice;
+  //     tCart.push(obj);
+  //     setItemChosen(tCart);
+  //     setProductPrice(tPrice);
+  //     console.log(itemChosen, productPrice);
+  // }
+  return (
+    <div className = "mainApp_row_class">
+      <Purchase 
+            // selectChange={selectChange}
+      />
+      <Cart 
+            // itemChosen={itemChosen}
+            // productPrice={productPrice}
+      />
+            <Total/> 
+      
+    </div>
+  )
+}
+
+export default App;
