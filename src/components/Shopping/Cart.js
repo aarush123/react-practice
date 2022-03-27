@@ -5,7 +5,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const itemChosen = useSelector(state=>state.cart);
+  const itemChosen = useSelector(state=>state.pr.cart);
+  const loggedInUser = useSelector(state=>state.lr.loginDetails)
   const deleteLi = (index, price) => {
     console.log('function is called', index, price)
     dispatch({
@@ -15,7 +16,7 @@ const Cart = () => {
   }
   return (
     <div className="card">
-        <h3>Cart Component</h3>
+        <h3>Cart Component - User: {loggedInUser}</h3>
         <hr/>
         {itemChosen.map((product, index)=>{
           return(
