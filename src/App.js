@@ -11,6 +11,7 @@ import { Routes, Route, Link, Redirect} from "react-router-dom";
 // import Buttons from './components/Buttons';
 import { useState, useCallback } from 'react';
 import TotalContext from "./store/Total-Context";
+import Login from "./components/Login";
 // import HeaderSection from './components/HeaderSection.js';
 // import CounterSection from './components/CounterSection';
 // import FlagSection from './components/FlagSection';
@@ -492,7 +493,7 @@ to create the redux application
 npx create-react-app name-of-app --template redux
 
 1. Create the global Store and Reducer
-2. use the <Provider> to pass/provide the store data --- generally when we have to make the provider then we wrap the app component in Provider.. 
+2. use the <Provider> to pass/provide the store data --- generally when we have to make the provider then we wrap the app component inside of index.js in Provider.. 
 3. Access the store data at component level --- to use the data on component level.. we can either use the useSelector() or useStore() hook or connect() in case of class based components 
 4. Dispatch actions if there are any events -- 
 
@@ -509,7 +510,7 @@ import Provider from 'react-redux';
   <App />
 </Provider>
 
-The above provider component takes in store as an prop which is the global store that I have created using 
+The above provider component takes in store as a prop which is the global store that I have created using 
 createStore(reducer) method of redux
 
 ---------- difference between useStore() and useSelector() hook ?------------------------
@@ -518,6 +519,24 @@ useStore() hook returns the entire store however useSelector() hook returns the 
 
 */
 
+/* 
+    to create the local store we will use the createStore() method of Redux, 
+    it returns the store object.. i.e, the global state
+    for eex. 
+    const store = createStore(reducer);
+    in the above application the constant store will contain the created global store, it takes in only one argument which is a function which is considered as reducer .. 
+
+    Note:- a reducer function will actually become the reducer when you pass it as an argument to the createStore() method 
+
+    this means that we will have to create the reducer method first and then pass it to createStore() as an argument.. 
+
+*/ 
+
+/* 
+the below function is the createStore method of Redux which is going to take reducer as an argument and as already discussed above, the reducer function has to be made before createStore function so that it can be passed to it.. 
+
+basically store is created and it has the reducer function as an argument which has the initial state and which is going change on event 
+*/
 
 const App = () => {
   const [demo, setDemo] = useState(0);
@@ -539,6 +558,7 @@ const App = () => {
   // }
   return (
     <div className = "mainApp_row_class">
+      <Login/>
       <Purchase 
             // selectChange={selectChange}
       />
@@ -553,3 +573,30 @@ const App = () => {
 }
 
 export default App;
+
+
+/* 
+  ------------------------------------------- COMBINING THE REDUCERS -----------------------
+
+now when there are multiple reducer functions then we can combine them for our convenience as managing state in just one reducer function can be very hectic.. now in order to implement this there are certain methods that are defined.. 
+
+step 1. import the combineReducer method from 'react-redux'.. now this combineReducer is going to take in a function which takes in object.. the object's key is my identifier and the value is the actual name of the reducer function .. so let us say that if there are two reducer functions .. these two functions are actually imported from the reducer functions that I have created.. there I am not using the createStore.. I am using createStore after combining the functions.. 
+const rootStore = combineReducers({
+  lr: LoginReducer,
+  pr: ProductReducer
+});
+
+const store = createStore(rootStore) (this rootStore is the name of the combined function)
+
+the above two code snippets has to be there in the index.js file.. in the main directory and make sure that you are not creating the store in the reducer function's files.. 
+
+now the reducer function will just be exported and it will be imported in the index.js file as there only we are creating the provider component which takes in store as a component.. so the store that has been created in the line 571, that  is going to work as a prop.. 
+
+there we will have to import certain things from redux 
+import { combineReducers, createStore } from 'redux';
+
+and in every component wherever I am using the useSelector hook.. the function will be replaced as such .. 
+
+state => state.lr.whateverIsTheNameOfTheState
+
+*/

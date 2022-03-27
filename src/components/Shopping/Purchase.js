@@ -21,7 +21,8 @@ payLoad: obj, --this takes in the information that I want to pass which is obj i
 */
 const Purchase = () => {
     const dispatch = useDispatch();
-    const products = useSelector(state=>state.products);
+    const products = useSelector(state=>state.pr.products);
+    const loginUser = useSelector(state=>state.lr.loginDetails);
     const selectChange = (e) => {
         let pName = e.target.options[e.target.selectedIndex].text;
         let price = e.target.value;
@@ -34,7 +35,7 @@ const Purchase = () => {
     }
     return (
     <div className="card">
-        <h3>Purchase Component</h3>
+        <h3>Purchase Component - User: {loginUser}</h3>
          <hr/>
 
         <select

@@ -6,7 +6,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
-import store from './store/Store';
+import { combineReducers, createStore } from 'redux';
+import LoginReducer from './store/LoginReducer';
+import ProductReducer from './store/ProductReducer';
+const rootStore = combineReducers({
+  lr: LoginReducer,
+  pr: ProductReducer
+})
+const store = createStore(rootStore);
 
 /* 
 Here I am importing the Provider function react redux which has to be wrapped around the entire App.js component so that I can access the global store on any level of the entire project.. 

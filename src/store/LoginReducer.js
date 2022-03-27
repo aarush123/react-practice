@@ -17,14 +17,13 @@ import { createStore } from "redux";
 
 
 const initialData = {
-    products: [
-        {pName:'Apple',price:30},
-        {pName:'Banana',price:3},
-        {pName:'Orange',price:10},
-        {pName:'Grapes',price:8}
-    ],
-    cart: [],
-    total: 0
+
+    loginUsersState : [
+        'Admin',
+        'Manager',
+        'User'
+    ], 
+    loginDetails : "none"
 }
 /* 
 In the below example, I am creating the reducer function which takes in two parameter.. 1st is State and 2nd is Action 
@@ -37,22 +36,12 @@ now this is the event handler for my global state changed..
 
 
 */
-const reducer = (state = initialData, action) => {
-    console.log(action);
-    if(action.type === "PURCHASE"){
-        return{
-            ...state,
-            cart: [...state.cart, action.payLoad], 
-            total: state.total + parseInt(action.payLoad.price) 
-        }
-        
-    }
-    if(action.type === "DELETE"){
+const LoginReducer = (state = initialData, action) => {
+
+    if(action.type === "Change User"){
         return {
             ...state,
-            cart: state.cart.filter((i, index)=> index!== action.payLoad.index),
-            total: state.total - action.payLoad.price
-            
+            loginDetails: action.payLoad
         }
     }
     // the first render for the action is going to return the initial state of the action too.. but as soon as I call the event listener(the dispatch method) in the select options change.. this action will be called and I have passed obj as payload there.. so it will be available here in the action . 
@@ -65,6 +54,10 @@ the below function is the createStore method of Redux which is going to take red
 
 basically store is created and it has the reducer function as an argument which has the initial state and which is going change on event 
 */
-const store = createStore(reducer);
+// const store = createStore(LoginReducer);
 
-export default store; 
+export default LoginReducer; 
+
+/* 
+Now the reducers are supposed to be more precised and in order to do that, we create multiple reducer for better understanding  
+*/
