@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react'
 import {useSelector, useDispatch} from 'react-redux';
+import { validateUser } from '../store/Actions';
 const Login = () => {
     const login = useSelector(state=>state.lr.loginUsersState);
     const dispatch = useDispatch();
     const changeUser = (e) => {
         let selectedUser = e.target.options[e.target.selectedIndex].text;
-        dispatch({
-            type: "Change User", 
-            payLoad: selectedUser
-        })
+        dispatch (validateUser(selectedUser))
     }
   return (
       <>

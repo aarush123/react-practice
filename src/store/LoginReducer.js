@@ -1,7 +1,6 @@
 // creating the global store for redux.. 
 
-import { createStore } from "redux";
-
+import * as Actions from './Actions'
 /* 
     to create the local store we will use the createStore() method of Redux, 
     it returns the store object.. i.e, the global state
@@ -38,7 +37,7 @@ now this is the event handler for my global state changed..
 */
 const LoginReducer = (state = initialData, action) => {
 
-    if(action.type === "Change User"){
+    if(action.type === Actions.CHANGEUSER){
         return {
             ...state,
             loginDetails: action.payLoad

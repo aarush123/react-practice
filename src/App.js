@@ -600,3 +600,50 @@ and in every component wherever I am using the useSelector hook.. the function w
 state => state.lr.whateverIsTheNameOfTheState
 
 */
+
+
+/* 
+------------------------------- USING CONSTANT IN PLACE OF ACTION.TYPE FOR DISPATCHING -------------------------------------
+creating separate action components so that there is no scope of error/typo,, this is a better programming practice and as you have observed that if there is an type for action.type it will not return an error that is why we use one separate file where we export the constants as the name of the action.. so that if there is any typo it will give error on compile time. 
+
+now how to do it ?? 
+
+you will create one main file named as Actions somewhere and you will export the constants.. just the normal stuff 
+export const DELETE = "DELETE" (this name has to be same as that of the dispatch event that you have created in the normal components)
+
+and then you will import the stuff to the reducer functions... even if you are combining reducers.. they will be called in to the let alone functions as 
+ ~~~~ import * as Actions from './Actions';
+
+ then you can use them as Actions.DELETE ( OR WHATEVER THE NAME THAT YOU HAVE KEPT FOR YOUR CONSTANT)
+
+
+ -------- BASICALLY INSTEAD OF PUTTING STRINGS ANYWHERE IN THE PROJECT, WE DEFINE CONSTANTS -----
+*/
+
+
+/* 
+
+  now redux does not have any way to manage asynchronous data and in that case we use a different method which is redux-thunk.. 
+
+  thunk being a middleware, it gets executed on every dispatch.. 
+
+  ~~ npm install redux-thunk
+  ~~ in the index.js, one package needs to be imported which is applyMiddleware from react-redux, to activate any middleware we will have to use this applyMiddleware function 
+  ~~ import thunk from 'redux-thunk'
+  now this thunk will be passed to createStore() as the second argument after the reducer function, 
+
+  const store = createStore (rootReducer, applyMiddleware(thunk))
+  and we can pass the middleware in the applyMiddleware function as the argument by just putting comma
+
+  now the syntax for it 
+
+  const validateUser = () => {
+    return dispatch => {
+      setTimeout(()=>{
+        dispatch({type: LOGIN, payLoad: initialObject});
+      }, 2000);
+    }
+  }
+
+*/
+

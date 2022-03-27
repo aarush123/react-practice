@@ -14,7 +14,7 @@
     this means that we will have to create the reducer method first and then pass it to createStore() as an argument.. 
 
 */ 
-
+import * as Actions from './Actions'
 
 const initialData = {
     products: [
@@ -39,7 +39,7 @@ now this is the event handler for my global state changed..
 */
 const productReducer = (state = initialData, action) => {
     console.log(action);
-    if(action.type === "PURCHASE"){
+    if(action.type === Actions.PURCHASE){
         return{
             ...state,
             cart: [...state.cart, action.payLoad], 
@@ -47,7 +47,7 @@ const productReducer = (state = initialData, action) => {
         }
         
     }
-    if(action.type === "DELETE"){
+    if(action.type === Actions.DELETE){
         return {
             ...state,
             cart: state.cart.filter((i, index)=> index!== action.payLoad.index),
